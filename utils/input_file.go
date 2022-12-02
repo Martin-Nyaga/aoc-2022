@@ -41,3 +41,9 @@ func (i InputFile) ReadLines() []string {
 
 	return result
 }
+
+func (i InputFile) ReadBytes() []byte {
+	s, err := os.ReadFile(i.filePath())
+	HandleError(err)
+	return s
+}
