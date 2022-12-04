@@ -35,7 +35,11 @@ func (q *Pqueue[P, V]) Empty() bool {
 }
 
 func (q *Pqueue[P, V]) Len() int {
-	return len(q.elements)
+	size := 0
+	for _, arr := range q.elements {
+		size += len(arr)
+	}
+	return size
 }
 
 func (q *Pqueue[P, V]) Push(p P, el V) {
@@ -87,9 +91,6 @@ func (q *Pqueue[P, V]) addPriority(priority P) {
 
 	insertIndex := 0
 	for i, prio := range q.priorities {
-		if prio == priority {
-			return
-		}
 		var insertHere bool
 		if q.mode == MinQueue {
 			insertHere = prio > priority
