@@ -1,4 +1,4 @@
-package util
+package pqueue
 
 import (
 	"testing"

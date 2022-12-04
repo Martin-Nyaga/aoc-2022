@@ -7,17 +7,18 @@ import (
 	"strings"
 
 	"github.com/martin-nyaga/aoc-2022/util"
+	"github.com/martin-nyaga/aoc-2022/util/rng"
 )
 
-func NewRange(str string) util.Range {
+func NewRange(str string) rng.Range {
 	sections := strings.Split(str, "-")
 	first, err := strconv.Atoi(sections[0])
 	util.HandleError(err)
 	last, err := strconv.Atoi(sections[1])
-	return util.Range{first, last}
+	return rng.Range{first, last}
 }
 
-type RangePair [2]util.Range
+type RangePair [2]rng.Range
 
 func (r RangePair) HasFullContainment() bool {
 	return r[0].Covers(r[1]) || r[1].Covers(r[0])

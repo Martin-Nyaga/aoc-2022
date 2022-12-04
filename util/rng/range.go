@@ -1,4 +1,4 @@
-package util
+package rng
 
 type Range [2]int
 
