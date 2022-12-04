@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/martin-nyaga/aoc-2022/utils"
+	"github.com/martin-nyaga/aoc-2022/util"
 )
 
 const (
@@ -65,7 +65,7 @@ func (r Round) ScoreRigged() int {
 }
 
 func parseInput(theirMap, myMap map[string]int) []Round {
-	file := utils.NewInputFile("2")
+	file := util.NewInputFile("2")
 
 	result := make([]Round, 0)
 	for _, line := range file.ReadLines() {

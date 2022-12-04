@@ -4,12 +4,12 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/martin-nyaga/aoc-2022/utils"
+	"github.com/martin-nyaga/aoc-2022/util"
 	set "k8s.io/apimachinery/pkg/util/sets"
 )
 
 func parseInput() []string {
-	file := utils.NewInputFile("3")
+	file := util.NewInputFile("3")
 	return file.ReadLines()
 }
 

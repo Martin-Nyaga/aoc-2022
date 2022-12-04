@@ -6,11 +6,11 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/martin-nyaga/aoc-2022/utils"
+	"github.com/martin-nyaga/aoc-2022/util"
 )
 
 func parseInput() [][]int {
-	file := utils.NewInputFile("1")
+	file := util.NewInputFile("1")
 
 	deers := make([][]int, 0)
 	deer := make([]int, 0)
@@ -19,7 +19,7 @@ func parseInput() [][]int {
 	for i, line := range lines {
 		if len(line) > 0 {
 			n, err := strconv.Atoi(line)
-			utils.HandleError(err)
+			util.HandleError(err)
 			deer = append(deer, n)
 		}
 
@@ -38,12 +38,12 @@ func main() {
 	deers := parseInput()
 	totals := make([]int, len(deers))
 	for _, deer := range deers {
-		totals = append(totals, utils.SumInts(deer))
+		totals = append(totals, util.SumInts(deer))
 	}
 
 	sort.Ints(totals)
 	most := totals[len(totals)-1]
-	topThree := utils.SumInts(totals[len(totals)-3:])
+	topThree := util.SumInts(totals[len(totals)-3:])
 
 	fmt.Println("Part 1:", most)
 	fmt.Println("Part 2:", topThree)

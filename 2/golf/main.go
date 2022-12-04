@@ -4,11 +4,11 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/martin-nyaga/aoc-2022/utils"
+	"github.com/martin-nyaga/aoc-2022/util"
 )
 
 func readInput() []byte {
-	return utils.NewInputFile("2").ReadBytes()
+	return util.NewInputFile("2").ReadBytes()
 }
 
 func main() {

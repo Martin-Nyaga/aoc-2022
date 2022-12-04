@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/martin-nyaga/aoc-2022/utils"
+	"github.com/martin-nyaga/aoc-2022/util"
 )
 
 type Range [2]int
@@ -14,7 +14,7 @@ type Range [2]int
 func NewRange(str string) Range {
 	sections := strings.Split(str, "-")
 	first, err := strconv.Atoi(sections[0])
-	utils.HandleError(err)
+	util.HandleError(err)
 	last, err := strconv.Atoi(sections[1])
 	return Range{first, last}
 }
@@ -41,7 +41,7 @@ func (r RangePair) HasIntersection() bool {
 }
 
 func parseInput() []RangePair {
-	file := utils.NewInputFile("4")
+	file := util.NewInputFile("4")
 
 	pairs := make([]RangePair, 0)
 	for _, line := range file.ReadLines() {
