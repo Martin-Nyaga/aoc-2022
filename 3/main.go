@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/martin-nyaga/aoc-2022/util"
-	set "k8s.io/apimachinery/pkg/util/sets"
 )
 
 func parseInput() []string {
@@ -28,17 +27,17 @@ func main() {
 	dups := make([]byte, 0)
 	for _, line := range input {
 		bytes := []byte(line)
-		first := make(map[byte]bool)
+		first := util.NewByteSet()
 		for i := 0; i < len(bytes)/2; i++ {
-			first[bytes[i]] = true
+			first.Add(bytes[i])
 		}
 
-		second := make(map[byte]bool)
+		second := util.NewByteSet()
 		for i := len(bytes) / 2; i < len(bytes); i++ {
-			if first[bytes[i]] {
+			if first.Has(bytes[i]) && !second.Has(bytes[i]) {
 				dups = append(dups, bytes[i])
 			}
-			second[bytes[i]] = true
+			second.Add(bytes[i])
 		}
 	}
 
@@ -50,12 +49,12 @@ func main() {
 	labels := 0
 	for i := 0; i < (len(input) - 2); i += 3 {
 		group := input[i : i+3]
-		sets := make([]set.Byte, 3)
+		sets := make([]util.ByteSet, 3)
 		for i, elf := range group {
 			bytes := []byte(elf)
-			sets[i] = set.NewByte(bytes...)
+			sets[i] = util.NewByteSet(bytes...)
 		}
-		common, _ := sets[0].Intersection(sets[1]).Intersection(sets[2]).PopAny()
+		common, _ := sets[0].Intersection(&sets[1]).Intersection(&sets[2]).PopAny()
 		labels += Priority(common)
 	}
 
