@@ -1,6 +1,9 @@
 package util
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type void struct{}
 type Set[T comparable] map[T]void
@@ -22,12 +25,20 @@ func (s *Set[T]) Has(b T) bool {
 	return exists
 }
 
-func (s *Set[T]) Remove(b T) bool {
+func (s *Set[T]) Empty() bool {
+	return s.Len() == 0
+}
+
+func (s *Set[T]) Len() int {
+	return len(*s)
+}
+
+func (s *Set[T]) Remove(b T) error {
 	if !s.Has(b) {
-		return false
+		return fmt.Errorf("Set doesn't have %#v", b)
 	}
 	delete(*s, b)
-	return true
+	return nil
 }
 
 func (s *Set[T]) Intersection(other *Set[T]) *Set[T] {
