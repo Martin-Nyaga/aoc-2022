@@ -9,25 +9,15 @@ import (
 	"github.com/martin-nyaga/aoc-2022/util"
 )
 
-type Range [2]int
-
-func NewRange(str string) Range {
+func NewRange(str string) util.Range {
 	sections := strings.Split(str, "-")
 	first, err := strconv.Atoi(sections[0])
 	util.HandleError(err)
 	last, err := strconv.Atoi(sections[1])
-	return Range{first, last}
+	return util.Range{first, last}
 }
 
-func (r Range) Covers(o Range) bool {
-	return r[0] <= o[0] && r[1] >= o[1]
-}
-
-func (r Range) Intersects(o Range) bool {
-	return (r[0] <= o[0] && r[1] >= o[0]) || (r[0] <= o[1] && r[1] >= o[1])
-}
-
-type RangePair [2]Range
+type RangePair [2]util.Range
 
 func (r RangePair) HasFullContainment() bool {
 	return r[0].Covers(r[1]) || r[1].Covers(r[0])
