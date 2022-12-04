@@ -24,9 +24,6 @@ func (r RangePair) HasFullContainment() bool {
 }
 
 func (r RangePair) HasIntersection() bool {
-	if r.HasFullContainment() {
-		return true
-	}
 	return r[0].Intersects(r[1])
 }
 
