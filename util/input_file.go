@@ -47,3 +47,7 @@ func (i InputFile) ReadBytes() []byte {
 	HandleError(err)
 	return s
 }
+
+func (i InputFile) ReadToString() string {
+	return string(i.ReadBytes())
+}
