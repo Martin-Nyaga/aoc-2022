@@ -6,33 +6,33 @@ import (
 	"strings"
 
 	"github.com/martin-nyaga/aoc-2022/util"
-	"github.com/martin-nyaga/aoc-2022/util/stack"
+	"github.com/martin-nyaga/aoc-2022/util/slices"
 )
 
 type Move [3]int
 
-func (m Move) Execute(stacks []stack.Stack[byte]) {
+func (m Move) Execute(stacks Stacks) {
 	count := m[0]
 	source := m[1]
 	target := m[2]
 
 	for i := 0; i < count; i++ {
-		popped, err := stacks[source].Pop()
+		popped, err := slices.Pop(&stacks[source])
 		util.HandleError(err)
-		stacks[target].Push(popped)
+		stacks[target] = append(stacks[target], popped)
 	}
 }
 
-func (m Move) ExecuteInOrder(stacks []stack.Stack[byte]) {
+func (m Move) ExecuteInOrder(stacks Stacks) {
 	count := m[0]
 	source := m[1]
 	target := m[2]
-	popped, err := stacks[source].PopMulti(count)
+	popped, err := slices.PopN(&stacks[source], count)
 	util.HandleError(err)
-	stacks[target].Push(popped...)
+	stacks[target] = append(stacks[target], popped...)
 }
 
-type Stacks []stack.Stack[byte]
+type Stacks [][]byte
 
 func (s Stacks) Tops() []byte {
 	result := make([]byte, 0)
@@ -57,12 +57,12 @@ func parseInput() (Stacks, []Move) {
 	rawMoves := strings.Split(strings.TrimSpace(arr[1]), "\n")
 
 	stacksCount := len(strings.Fields(rawStacks[len(rawStacks)-1]))
-	stacks := make([]stack.Stack[byte], stacksCount, stacksCount)
+	stacks := make([][]byte, stacksCount, stacksCount)
 	for i := len(rawStacks) - 2; i >= 0; i-- {
 		slice := rawStacks[i]
 		for j, ch := range []byte(slice) {
 			if j%4 == 1 && ch != ' ' {
-				stacks[j/4].Push(ch)
+				stacks[j/4] = append(stacks[j/4], ch)
 			}
 		}
 	}
