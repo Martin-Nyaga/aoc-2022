@@ -7,7 +7,6 @@ import (
 )
 
 type queuable interface {
-	comparable
 	constraints.Ordered
 }
 
