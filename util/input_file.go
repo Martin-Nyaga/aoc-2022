@@ -9,22 +9,22 @@ import (
 var UseSampleInput = flag.Bool("sample", false, "Use sample input")
 
 type InputFile struct {
-	sampleFilePath string
-	inputFilePath  string
+	SampleFilePath string
+	InputFilePath  string
 }
 
 func NewInputFile(problem string) InputFile {
 	return InputFile{
-		sampleFilePath: "./" + problem + "/sample.txt",
-		inputFilePath:  "./" + problem + "/input.txt",
+		SampleFilePath: "./" + problem + "/sample.txt",
+		InputFilePath:  "./" + problem + "/input.txt",
 	}
 }
 
 func (i InputFile) filePath() string {
 	if *UseSampleInput {
-		return i.sampleFilePath
+		return i.SampleFilePath
 	} else {
-		return i.inputFilePath
+		return i.InputFilePath
 	}
 }
 
