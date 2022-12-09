@@ -95,10 +95,7 @@ func (t *TrackedPoint) FollowAndPropagate(prev *Point) {
 }
 
 func parseInput() []Move {
-	file := util.InputFile{
-		SampleFilePath: "./9/sample_part2.txt",
-		InputFilePath:  "./9/input.txt",
-	}
+	file := util.NewInputFile("9")
 	moves := make([]Move, 0)
 	for _, line := range file.ReadLines() {
 		var direction string
@@ -114,7 +111,17 @@ func main() {
 	moves := parseInput()
 
 	head := newTrackedPoint(Point{0, 0})
-	var tail *TrackedPoint
+	end := newTrackedPoint(Point{0, 0})
+	tail := &end
+	head.next = tail
+
+	for _, move := range moves {
+		head.MoveAndPropagate(&move)
+	}
+
+	fmt.Println("Part 1:", tail.tracker.Len())
+
+	head = newTrackedPoint(Point{0, 0})
 	curr := &head
 	for i := 0; i < 9; i++ {
 		next := newTrackedPoint(Point{0, 0})
