@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/martin-nyaga/aoc-2022/util"
+	"github.com/martin-nyaga/aoc-2022/util/slices"
 )
 
 func parseInput() [][]int {
@@ -38,12 +39,12 @@ func main() {
 	deers := parseInput()
 	totals := make([]int, len(deers))
 	for _, deer := range deers {
-		totals = append(totals, util.SumInts(deer))
+		totals = append(totals, slices.Sum(deer))
 	}
 
 	sort.Ints(totals)
 	most := totals[len(totals)-1]
-	topThree := util.SumInts(totals[len(totals)-3:])
+	topThree := slices.Sum(totals[len(totals)-3:])
 
 	fmt.Println("Part 1:", most)
 	fmt.Println("Part 2:", topThree)

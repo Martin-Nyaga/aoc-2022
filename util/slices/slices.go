@@ -34,3 +34,12 @@ func Shift[T any](s *[]T) (T, error) {
 	(*s) = (*s)[1:]
 	return val, nil
 }
+
+func Sum[T int](arr []T) T {
+	var total T
+	total = 0
+	for _, i := range arr {
+		total += i
+	}
+	return total
+}
