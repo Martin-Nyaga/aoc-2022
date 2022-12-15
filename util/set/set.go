@@ -59,3 +59,9 @@ func (s *Set[T]) PopAny() (T, error) {
 	var empty T
 	return empty, errors.New("Set didn't have any elements to pop")
 }
+
+func (s *Set[T]) Each(fn func(T)) {
+	for k := range *s {
+		fn(k)
+	}
+}
