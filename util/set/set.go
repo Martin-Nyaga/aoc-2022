@@ -65,3 +65,11 @@ func (s *Set[T]) Each(fn func(T)) {
 		fn(k)
 	}
 }
+
+func (s *Set[T]) ToSlice() []T {
+	result := make([]T, 0, s.Len())
+	s.Each(func(el T) {
+		result = append(result, el)
+	})
+	return result
+}
