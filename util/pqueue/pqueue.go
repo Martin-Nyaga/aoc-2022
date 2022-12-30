@@ -30,7 +30,7 @@ func NewPqueue[P queuable, V any](mode int) Pqueue[P, V] {
 }
 
 func (q *Pqueue[P, V]) Empty() bool {
-	return q.Len() == 0
+	return len(q.elements) == 0
 }
 
 func (q *Pqueue[P, V]) Len() int {
